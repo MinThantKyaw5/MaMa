@@ -4,18 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#fff5f7">
     <title>Love You "Ma Ma" ✨</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -25,7 +20,6 @@
             min-height: 100vh;
         }
 
-        /* DYNAMIC GLOW ANIMATION */
         .animated-glow {
             position: fixed;
             top: 50%;
@@ -33,79 +27,45 @@
             transform: translate(-50%, -50%);
             width: 85vw;
             height: 85vh;
-            background: radial-gradient(
-                circle,
-                rgba(244, 114, 182, 0.25) 0%,
-                rgba(255, 255, 255, 0) 70%
-            );
+            background: radial-gradient(circle, rgba(244,114,182,.25) 0%, transparent 70%);
             z-index: 0;
             pointer-events: none;
             animation: pulseGlow 6s ease-in-out infinite alternate;
         }
 
         @keyframes pulseGlow {
-            0% {
-                transform: translate(-50%, -50%) scale(0.9);
-                opacity: 0.6;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.15);
-                opacity: 1;
-            }
+            from { transform: translate(-50%, -50%) scale(.9); opacity: .6; }
+            to { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
         }
 
-        /* FLOATING HEARTS: BOTTOM TO TOP */
-        .floating-element {
+        .floating-element, .falling-element {
             position: fixed;
             font-size: 1.2rem;
             user-select: none;
             pointer-events: none;
-            animation: floatUp linear infinite;
             z-index: 1;
-            opacity: 0.7;
+            opacity: .8;
         }
+
+        .floating-element { animation: floatUp linear forwards; }
 
         @keyframes floatUp {
-            0% {
-                transform: translateY(105vh) scale(0.8) rotate(0deg);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.2) rotate(25deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(105vh) scale(.8); opacity: 0; }
+            20% { opacity: .8; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(25deg); opacity: 0; }
         }
 
-        /* FALLING HEARTS AND SPARKLES: TOP TO BOTTOM */
         .falling-element {
-            position: fixed;
             top: -5vh;
-            font-size: 1.2rem;
-            user-select: none;
-            pointer-events: none;
-            animation: fallDown linear infinite;
-            z-index: 1;
-            opacity: 0.8;
+            animation: fallDown linear forwards;
         }
 
         @keyframes fallDown {
-            0% {
-                transform: translateY(0) scale(0.7) rotate(0deg);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.85;
-            }
-            100% {
-                transform: translateY(110vh) scale(1.2) rotate(180deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) scale(.7); opacity: 0; }
+            20% { opacity: .85; }
+            100% { transform: translateY(110vh) scale(1.2) rotate(180deg); opacity: 0; }
         }
 
-        /* INTRO PAGE */
         #intro-page {
             position: fixed;
             inset: 0;
@@ -120,7 +80,7 @@
             background: linear-gradient(135deg, #fff5f7 0%, #fce7f0 100%);
             text-align: center;
             padding: 24px;
-            transition: opacity 1.2s ease;
+            transition: opacity 1s ease;
         }
 
         .editorial-title {
@@ -137,44 +97,35 @@
             color: #701a75;
             font-size: clamp(1rem, 2.2vw, 1.15rem);
             margin-bottom: 40px;
-            font-weight: 400;
-            letter-spacing: 0.5px;
+            letter-spacing: .5px;
         }
 
         .btn-action {
             background: linear-gradient(135deg, #ec4899, #db2777);
-            color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: white;
+            font-family: inherit;
             font-size: clamp(1rem, 2vw, 1.1rem);
             font-weight: 600;
             padding: 16px 44px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(219, 39, 119, 0.35);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(219,39,119,.35);
+            transition: transform .3s ease;
             animation: bounceSoft 2s infinite;
         }
 
         @keyframes bounceSoft {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-6px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
-        .btn-action:hover {
-            transform: scale(1.08) translateY(-3px);
-            box-shadow: 0 15px 30px rgba(219, 39, 119, 0.5);
-        }
+        .btn-action:hover { transform: scale(1.06); }
 
-        /* MAIN CONTENT */
         #main-content {
             display: none;
             opacity: 0;
-            transition: opacity 1.2s ease;
+            transition: opacity 1s ease;
         }
 
         .main-wrapper {
@@ -187,14 +138,14 @@
         }
 
         .romantic-card {
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid rgba(251, 207, 232, 0.9);
+            background: rgba(255,255,255,.88);
+            border: 1px solid rgba(251,207,232,.9);
             border-radius: 28px;
-            padding: clamp(30px, 6vw, 50px);
+            padding: clamp(24px, 6vw, 50px);
             margin-bottom: 25px;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 20px 40px rgba(157, 23, 77, 0.08);
+            box-shadow: 0 20px 40px rgba(157,23,77,.08);
             text-align: center;
         }
 
@@ -205,7 +156,7 @@
             object-fit: cover;
             border-radius: 20px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 25px rgba(0,0,0,.08);
         }
 
         .letter-content {
@@ -218,9 +169,7 @@
             margin-bottom: 35px;
         }
 
-        .letter-content p {
-            margin-bottom: 18px;
-        }
+        .letter-content p { margin-bottom: 18px; }
 
         .question-title {
             font-family: 'Cormorant Garamond', serif;
@@ -231,7 +180,6 @@
             font-style: italic;
         }
 
-        /* BUTTONS */
         .btn-group {
             display: flex;
             justify-content: center;
@@ -245,36 +193,32 @@
 
         .btn-yes {
             background: linear-gradient(135deg, #ec4899, #be185d);
-            color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: white;
+            font-family: inherit;
             font-size: 1.1rem;
             font-weight: 600;
             padding: 14px 44px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(190, 24, 93, 0.35);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(190,24,93,.35);
+            transition: transform .3s ease;
         }
 
-        .btn-yes:hover {
-            transform: scale(1.08);
-            box-shadow: 0 12px 25px rgba(190, 24, 93, 0.5);
-        }
+        .btn-yes:hover { transform: scale(1.06); }
 
         .btn-no {
-            background: #ffffff;
+            background: white;
             border: 1.5px solid #fbcfe8;
             color: #9d174d;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: inherit;
             font-size: 1.05rem;
             font-weight: 600;
             padding: 14px 38px;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-            transition: background 0.2s ease, border-color 0.2s ease,
-                        transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,.03);
+            transition: background .2s ease;
         }
 
         .btn-no:hover {
@@ -282,11 +226,7 @@
             border-color: #f472b6;
         }
 
-        /* SUCCESS SCREEN */
-        #success-screen {
-            display: none;
-            text-align: center;
-        }
+        #success-screen { display: none; text-align: center; }
 
         .success-title {
             font-family: 'Cormorant Garamond', serif;
@@ -306,118 +246,58 @@
             font-weight: 500;
         }
 
-        /* ACCESSIBLE FOCUS */
         button:focus-visible {
             outline: 3px solid #9d174d;
             outline-offset: 4px;
         }
 
         @media (max-width: 480px) {
-            .main-wrapper {
-                padding: 24px 0;
-            }
-
-            .romantic-card {
-                padding: 24px;
-                border-radius: 24px;
-            }
-
-            .btn-group {
-                gap: 12px;
-            }
-
-            .btn-yes,
-            .btn-no {
-                padding: 13px 28px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                scroll-behavior: auto !important;
-            }
+            .main-wrapper { padding: 24px 0; }
+            .btn-group { gap: 12px; }
+            .btn-yes, .btn-no { padding: 13px 28px; }
         }
     </style>
 </head>
 
 <body>
+    <div class="animated-glow"></div>
 
-    <div class="animated-glow" aria-hidden="true"></div>
-
-    <!-- BACKGROUND MUSIC
-         Keep love_song_v2.mp3 in the same folder as index.html.
-         The query string helps browsers request the updated audio file.
-    -->
     <audio id="bg-music" loop preload="auto">
         <source src="./love_song_v2.mp3?v=20261012" type="audio/mpeg">
-        Your browser does not support HTML audio.
     </audio>
 
-    <!-- INTRO PAGE -->
     <div id="intro-page">
         <h1 class="editorial-title">
             My world was already quiet, <br>
             until you walked into it... 💖
         </h1>
-
         <p class="intro-subtitle">A space meant only for you</p>
-
-        <button id="open-btn" class="btn-action" type="button">
+        <button class="btn-action" onclick="revealSurprise()" type="button">
             Open with love 😁
         </button>
     </div>
 
-    <!-- MAIN CONTENT -->
     <div id="main-content">
         <div class="main-wrapper">
 
             <div id="proposal-card" class="romantic-card">
-
-                <img
-                    src="./couple-photo.jpg"
-                    alt="Us"
-                    class="gallery-img"
-                >
+                <img src="./couple-photo.jpg" alt="Us" class="gallery-img">
 
                 <div class="letter-content">
-                    <p>
-                        In a world full of noise, your presence is my absolute
-                        peace. Every smile you share and every moment with you
-                        brightens up my days in ways I cannot fully describe...
-                    </p>
-
-                    <p>
-                        You bring so much magic, warmth, and laughter into my
-                        life simply by being you. I cannot wait to create
-                        endless beautiful memories with you...
-                    </p>
+                    <p>In a world full of noise, your presence is my absolute peace. Every smile you share and every moment with you brightens up my days in ways I cannot fully describe...</p>
+                    <p>You bring so much magic, warmth, and laughter into my life simply by being you. I cannot wait to create endless beautiful memories with you...</p>
                 </div>
 
-                <h2 class="question-title">
-                    Will you be my girlfriend? 🥺
-                </h2>
+                <h2 class="question-title">Will you be my girlfriend? 🥺</h2>
 
                 <div class="btn-group">
-                    <button id="yes-btn" class="btn-yes" type="button">
-                        YES! 💖
-                    </button>
-
-                    <button id="no-btn" class="btn-no" type="button">
-                        No 💔
-                    </button>
+                    <button id="yes-btn" class="btn-yes" onclick="acceptedProposal()" type="button">YES! 💖</button>
+                    <button id="no-btn" class="btn-no" onclick="handleNoClick()" type="button">No 💔</button>
                 </div>
             </div>
 
-            <!-- SUCCESS SCREEN -->
             <div id="success-screen" class="romantic-card">
-                <h1 class="success-title">
-                    You are my favorite place to be. ✨💖
-                </h1>
-
+                <h1 class="success-title">You are my favorite place to be. ✨💖</h1>
                 <p class="success-text">
                     Thank you for choosing me. <br>
                     I promise to make every single day special for you. 🥂💕
@@ -428,27 +308,37 @@
     </div>
 
     <script>
-        "use strict";
+        // Open the page and start music from the user's click.
+        function revealSurprise() {
+            const introPage = document.getElementById("intro-page");
+            const mainContent = document.getElementById("main-content");
+            const music = document.getElementById("bg-music");
 
-        // BACKGROUND MUSIC
-        const bgMusic = document.getElementById("bg-music");
+            // Attempt audio playback without blocking the page transition.
+            const musicPromise = music.play();
 
-        bgMusic.addEventListener("canplay", () => {
-            console.log("Music loaded and ready to play.");
-        });
+            if (musicPromise && typeof musicPromise.catch === "function") {
+                musicPromise.catch(function (error) {
+                    console.error("Music could not play:", error.name, error.message);
+                });
+            }
 
-        bgMusic.addEventListener("error", () => {
-            console.error(
-                "Music loading error. Check the MP3 filename, path and file format.",
-                bgMusic.error
-            );
-        });
+            introPage.style.opacity = "0";
 
-        bgMusic.addEventListener("playing", () => {
-            console.log("Background music is playing.");
-        });
+            setTimeout(function () {
+                introPage.style.display = "none";
+                mainContent.style.display = "block";
 
-        // FLOATING ELEMENTS: BOTTOM TO TOP
+                startFloatingElements();
+                startFallingElements();
+
+                requestAnimationFrame(function () {
+                    mainContent.style.opacity = "1";
+                });
+            }, 1000);
+        }
+
+        // Floating hearts and sparkles.
         let floatingStarted = false;
 
         function startFloatingElements() {
@@ -457,25 +347,19 @@
 
             const items = ["💖", "✨", "🌸", "💕", "🤍"];
 
-            setInterval(() => {
+            setInterval(function () {
                 const el = document.createElement("div");
-
-                el.classList.add("floating-element");
-                el.setAttribute("aria-hidden", "true");
-                el.textContent =
-                    items[Math.floor(Math.random() * items.length)];
-
+                el.className = "floating-element";
+                el.textContent = items[Math.floor(Math.random() * items.length)];
                 el.style.left = Math.random() * 100 + "vw";
-                el.style.animationDuration =
-                    (Math.random() * 3 + 4) + "s";
-
+                el.style.animationDuration = (Math.random() * 3 + 4) + "s";
                 document.body.appendChild(el);
 
-                setTimeout(() => el.remove(), 7500);
+                setTimeout(function () { el.remove(); }, 7500);
             }, 500);
         }
 
-        // FALLING ELEMENTS: TOP TO BOTTOM
+        // Falling hearts and sparkles.
         let fallingStarted = false;
 
         function startFallingElements() {
@@ -484,70 +368,19 @@
 
             const items = ["💖", "✨", "🌷", "💕", "🤍", "🌸"];
 
-            setInterval(() => {
+            setInterval(function () {
                 const el = document.createElement("div");
-
-                el.classList.add("falling-element");
-                el.setAttribute("aria-hidden", "true");
-                el.textContent =
-                    items[Math.floor(Math.random() * items.length)];
-
+                el.className = "falling-element";
+                el.textContent = items[Math.floor(Math.random() * items.length)];
                 el.style.left = Math.random() * 100 + "vw";
-                el.style.animationDuration =
-                    (Math.random() * 3 + 4) + "s";
-
+                el.style.animationDuration = (Math.random() * 3 + 4) + "s";
                 document.body.appendChild(el);
 
-                setTimeout(() => el.remove(), 7500);
+                setTimeout(function () { el.remove(); }, 7500);
             }, 400);
         }
 
-        // OPEN THE SURPRISE
-        async function revealSurprise() {
-            const openBtn = document.getElementById("open-btn");
-            const introPage = document.getElementById("intro-page");
-            const mainContent = document.getElementById("main-content");
-
-            // Prevent multiple clicks during the transition.
-            openBtn.disabled = true;
-
-            /*
-             * Attempt playback directly inside the user-click action.
-             * This is important because browsers may block autoplay.
-             */
-            try {
-                bgMusic.volume = 1;
-                await bgMusic.play();
-                console.log("Music playback started successfully.");
-            } catch (error) {
-                console.error(
-                    "Audio playback failed:",
-                    error.name,
-                    error.message
-                );
-
-                /*
-                 * The page still opens if the audio cannot play.
-                 * Check the MP3 file path and browser Console.
-                 */
-            }
-
-            introPage.style.opacity = "0";
-
-            setTimeout(() => {
-                introPage.style.display = "none";
-                mainContent.style.display = "block";
-
-                startFloatingElements();
-                startFallingElements();
-
-                requestAnimationFrame(() => {
-                    mainContent.style.opacity = "1";
-                });
-            }, 1000);
-        }
-
-        // NO BUTTON
+        // Handle the No button.
         let noClickCount = 0;
 
         const noPhrases = [
@@ -571,21 +404,21 @@
             noClickCount++;
 
             const yesScale = Math.min(1 + noClickCount * 0.18, 2.5);
-            yesBtn.style.transform = `scale(${yesScale})`;
+            yesBtn.style.transform = "scale(" + yesScale + ")";
 
             if (noClickCount >= 2) {
                 const x = Math.random() * 180 - 90;
                 const y = Math.random() * 80 - 40;
-
-                noBtn.style.transform = `translate(${x}px, ${y}px)`;
+                noBtn.style.transform = "translate(" + x + "px, " + y + "px)";
             }
         }
 
-        // SUCCESS SCREEN AND CONFETTI
+        // Handle YES and show the success screen.
         function acceptedProposal() {
             document.getElementById("proposal-card").style.display = "none";
             document.getElementById("success-screen").style.display = "block";
 
+            // Confetti is optional; the YES button still works if the library fails.
             if (typeof confetti === "function") {
                 const duration = 4000;
                 const end = Date.now() + duration;
@@ -614,26 +447,13 @@
             }
         }
 
-        /*
-         * SECURITY NOTE:
-         * Telegram bot credentials must not be placed in public HTML.
-         * To restore notifications, use a server-side endpoint and store
-         * the bot token in a server environment variable.
-         */
-
-        // BUTTON EVENT LISTENERS
-        document
-            .getElementById("open-btn")
-            .addEventListener("click", revealSurprise);
-
-        document
-            .getElementById("yes-btn")
-            .addEventListener("click", acceptedProposal);
-
-        document
-            .getElementById("no-btn")
-            .addEventListener("click", handleNoClick);
+        // Report audio errors in the browser console.
+        document.getElementById("bg-music").addEventListener("error", function () {
+            console.error(
+                "Audio failed to load. Check that love_song_v2.mp3 exists beside index.html.",
+                this.error
+            );
+        });
     </script>
-
 </body>
 </html>
