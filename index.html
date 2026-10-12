@@ -366,7 +366,17 @@
             const mainContent = document.getElementById('main-content');
             const bgMusic = document.getElementById('bg-music');
 
-            bgMusic.play().catch(e => console.log(e));
+            bgMusic.onerror = () => {
+                console.error("Audio loading error:", bgMusic.error);
+            };
+
+            bgMusic.oncanplay = () => {
+                console.log("Audio file loaded and ready to play.");
+            };
+
+            bgMusic.play().catch(error => {
+                console.error("Audio playback failed:", error);
+            });
 
             introPage.style.opacity = '0';
             setTimeout(() => {
